@@ -1,0 +1,3 @@
+conf:/etc/zabbix/zabbix_agentd.d/codename_list.conf
+shell：/etc/zabbix/scripts/zbx_discovery_codename_list.sh
+data:/etc/zabbix/discovery_data/discovery_ecs_codename.json`
