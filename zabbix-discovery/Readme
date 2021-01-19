@@ -1,0 +1,26 @@
+Item
+Name            Key
+Druid {#DRUID}  druid_list[{#DRUID}]    
+Druid {#DRUID}  AggregateLag    druid[{#DRUID},aggregateLag]    
+Druid {#DRUID}  Healthy druid[{#DRUID},healthy]  
+Druid {#DRUID}  State   druid[{#DRUID},state]  
+
+
+Discovery rule
+
+Name:Druid data discovery
+Key:druid_json
+Type:zabbix-agent
+Other:
+conf:/etc/zabbix/zabbix_agentd.d/druid.conf
+shell：/etc/zabbix/scripts/druid_list.sh
+data:/etc/zabbix/discovery_data/druid.json
+
+
+Trigger prototypes
+
+Druid {#DRUID} AggregateLag 大于10万            {ali-iad102-druid2-133-190:druid[{#DRUID},aggregateLag].last()}>100000  
+Disaster Druid {#DRUID} Healthy Not True        {ali-iad102-druid2-133-190:druid[{#DRUID},healthy].str(ture)}=1 
+Disaster Druid {#DRUID} NULL                    {ali-iad102-druid2-133-190:druid_list[{#DRUID}].last()}<>0  
+Disaster Druid {#DRUID} State Not Runing        {ali-iad102-druid2-133-190:druid[{#DRUID},state].str("\"RUNNING\"")}=1
+
